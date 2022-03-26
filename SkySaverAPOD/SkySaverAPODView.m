@@ -44,6 +44,12 @@ static int update_zoom_by = 1;
         paragraphStyle = [[NSMutableParagraphStyle alloc] init];
         paragraphStyle.alignment = NSTextAlignmentRight;
         paragraphStyle.headIndent = 10;
+
+        NSDateFormatter *dateFormatter=[[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+
+        NSString *urlPrefix = @"https://api.nasa.gov/planetary/apod?api_key=v7ZYRL3q51GauWq1JYwg3ytoNDwm3ELnOGe7H6H8&date=";
+        NSString *urlWithDate = [urlPrefix stringByAppendingString:[dateFormatter stringFromDate:[NSDate date]]];
         
         // request HTTP info
         // Create NSURLSession object
@@ -51,7 +57,7 @@ static int update_zoom_by = 1;
 
         // Create a NSURL object.
 //        NSURL* url = [NSURL URLWithString:@"https://api.nasa.gov/planetary/apod?api_key=v7ZYRL3q51GauWq1JYwg3ytoNDwm3ELnOGe7H6H8&date=2020-07-24"];
-          NSURL* url = [NSURL URLWithString:@"https://api.nasa.gov/planetary/apod?api_key=v7ZYRL3q51GauWq1JYwg3ytoNDwm3ELnOGe7H6H8&date=2020-07-18"];
+          NSURL* url = [NSURL URLWithString:urlWithDate];
 
         // Create NSURLSessionDataTask task object by url and session object.
         NSURLSessionDataTask* task = [session dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
